@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head> 
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        button {
+            padding: 5px 10px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        a {
+            display: block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Result</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Score</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="greeting, itemStat : ${greetingList}">
+                <td th:text="${greeting.id}" />
+                <td th:text="${greeting.rank}" />
+                <td th:text="${greeting.name}" />
+                <td th:text="${greeting.score}" />
+                <td>
+                    <a th:href="@{/edit/{id}(id=${greeting.id})}">Edit</a>
+                    <form th:action="@{/delete}" method="post">
+                        <input type="hidden" th:name="id" th:value="${greeting.id}" />
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/greeting">Add other Student</a>
+</body>
+
+</html>
+
+
